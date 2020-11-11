@@ -64,15 +64,23 @@
 						<div class="row">
 							<div class="col-6 col-12-medium">
 								<section>
-								
-										<div class="col-12">
-											<a href="../domicilios-master/private/modulos/comentarios/comentario.php" class="form-button-submit button icon solid fa-envelope">Enviar Mensaje</a>
+									<form id="sugerencias" method="GET" >
+										<div class="row gtr-50">
+											<div class="col-6 col-12-small">
+												<input id="name" name="nombre" placeholder="Nombre" type="text" />
+											</div>
+											<div class="col-6 col-12-small">
+												<input id="email" name="email" placeholder="Email" type="text" />
+											</div>
+											<div class="col-12">
+												<textarea id="mensaje" name="mensaje" placeholder="Mensaje"></textarea>
+											</div>
+											<div class="col-12">
+												<input type="submit" class="form-button-submit button icon solid fa-envelope" value="Enviar Mensaje"/>
+											</div>
 										</div>
-									</div>
-
-							
-											
 									</form>
+									
 								</section>
 							</div>
 							<div class="col-6 col-12-medium">
@@ -113,6 +121,26 @@
 
 		</script>
 		<script src="assets/js/main.js"></script>
+
+		<script>
+			function sendmsj(){
+				
+
+				const Nombre =document.getElementById("name").value 
+				const email=document.getElementById("email").value
+				const mensaje=document.getElementById("mensaje").value
+				const data={accion:'nuevo', Nombre, email, mensaje}
+				 fetch(`./private/modulos/comentarios/comentario.php?proceso=recibirDatos&usuario=${JSON.stringify(data)}`).then( result => result.json() ).then( result => {
+
+				 })
+
+			}
+			document.getElementById('sugerencias').addEventListener('submit',e => {
+				e.preventDefault()
+				sendmsj()
+			})
+		</script>
+
 	
 	</body>
 </html>

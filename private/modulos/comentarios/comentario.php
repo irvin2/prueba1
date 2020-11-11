@@ -1,128 +1,76 @@
-<?php
-session_start();
-include '../../config/config.php';
-include "./funciones.php";
+<?php 
+include('../../config/config.php');
+$usuario = new usuario($conexion);
 
-/*if(!isset($_SESSION['usuarior'])) {
-	header("Location: registro.html");
-}*/
+$proceso = '';
+if( isset($_GET['proceso']) && strlen($_GET['proceso'])>0 ){
+	$proceso = $_GET['proceso'];
+}
+$usuario->$proceso( $_GET['usuario'] );
+print_r(json_encode($usuario->respuesta));
 
-ini_set('error_reporting',0);
-?>
-<!doctype html>
-<html lang="es-ES">
-<head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-  <title>Sistema de Comentarios </title>
-  
-</head>
-
-<body>
-
-<div id="L">
-
-<h1>SISTEMA DE COMENTARIOS  </h1>
-
-<form name="form1" method="post" action="">
-  <label for="textarea"></label>
-  <center>
-    <p>
-      <textarea name="comentario" cols="80" rows="5" id="textarea"><?php if(isset($_GET['user'])) { ?>@<?php echo $_GET['user']; ?><?php } ?> </textarea>
-    </p>
-    <p>
-      <input type="submit" <?php if (isset($_GET['id'])) { ?>name="reply"<?php } else { ?>name="comentar"<?php } ?>value="Comentar">
-    </p>
-  </center>
-</form>
-
-<?php
-	if(isset($_POST['comentar'])) {
-		$query = mysql_query("INSERT INTO comentarios (comentario,usuario,fecha) value ('".$_POST['comentario']."','".$_SESSION['id']."',NOW())");	
-		if($query) { header("Location: index.php"); }
-	}
-?>
-
-<?php
-	if(isset($_POST['reply'])) {
-		$query = mysql_query("INSERT INTO comentarios (comentario,usuario,fecha,reply) value ('".$_POST['comentario']."','".$_SESSION['id']."',NOW(),'".$_GET['id']."')");	
-		if($query) { header("Location: index.php"); }
-	}
-?>
-
-<br>
-
-	<div id="container">
-    	<ul id="comments">
-        
-        <?php
-		
-        $comentarios = mysql_query("SELECT * FROM comentarios WHERE reply = 0 ORDER BY id DESC");
-		while($row=mysql_fetch_array($comentarios)) {
-			
-			$usuario = mysql_query("SELECT * FROM usuarios WHERE id = '".$row['usuario']."'");
-			$user = mysql_fetch_array($usuario);
-
-		?>
-        
-        	<li class="cmmnt">
-            	<div class="avatar">
-                <img src="<?php echo $user['avatar']; ?>" height="55" width="55">
-                </div>
-                <div class="cmmnt-content">
-                	<header>
-                    <a href="#" class="userlink"><?php echo $user['usuario']; ?></a> - <span class="pubdate"><?php echo $row['fecha']; ?></span>
-                    </header>
-                    <p>
-                    <?php echo $row['comentario']; ?>
-                    </p>
-                    <span>
-                    <a href="index.php?user=<?php echo $user['usuario']; ?>&id=<?php echo $row['id']; ?>">
-                    Responder
-                    </a>
-                    </span>
-                </div>
-                
-                <?php
-				$contar = mysql_num_rows(mysql_query("SELECT * FROM comentarios WHERE reply = '".$row['id']."'"));
-				if($contar != '0') {
-					
-					$reply = mysql_query("SELECT * FROM comentarios WHERE reply = '".$row['id']."' ORDER BY id DESC");
-					while($rep=mysql_fetch_array($reply)) {
-						
-					$usuario2 = mysql_query("SELECT * FROM usuarios WHERE id = '".$rep['usuario']."'");
-					$user2 = mysql_fetch_array($usuario2);
-				?>
-                
-                <ul class="replies">
-                	<li class="cmmnt">
-                    	<div class="avatar">
-                <img src="<?php echo $user2['avatar']; ?>" height="55" width="55">
-                </div>
-                	<div class="cmmnt-content">
-                        <header>
-                        <a href="#" class="userlink"><?php echo $user2['usuario']; ?></a> - <span class="pubdate"><?php echo $rep['fecha']; ?></span>
-                        </header>
-                        <p>
-                        <?php echo $rep['comentario']; ?>
-                        </p>
-                    </div>
+class usuario{
+    private $datos = array(), $db;
+    public $respuesta = ['msg'=>'correcto'];
+    
+    public function __construct($db){
+        $this->db=$db;
+    }
+    public function recibirDatos($usuario){
+        $this->datos = json_decode($usuario, true);
+        $this->validar_datos();
+    }
+    private function validar_datos(){
+        if( empty($this->datos['Nombre']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el nombre del Usuario';
+        }
+        if( empty($this->datos['mensaje']) ){
+            $this->respuesta['msg'] = 'por favor ingrese su contraseña';
+        }
+        if( empty($this->datos['email']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el correo ';
+        }
+        $this->almacenar_usuario();
+    }
+    private function almacenar_usuario(){
+        if( $this->respuesta['msg']==='correcto' ){
+            if( $this->datos['accion']==='nuevo' ){
+                $this->db->consultas('
+                    INSERT INTO  sugerencias (nombre,sugerencia,correo) VALUES(
+                     
+                        "'. $this->datos['Nombre'] .'",
+                        "'. $this->datos['mensaje'] .'",
+                        "'. $this->datos['email'] .'"
+                    )
                     
-                    </li>
-                </ul>
-                
-                <?php } } } ?>
-                
-                
-            </li>        
-        
-        </ul>
-    </div>
-       
-        
-        
-        
-
-</div>
-
-</body>
-</html>
+                ');
+                $this->respuesta['msg'] = 'Registro insertado correctamente';
+            } else if( $this->datos['accion']==='modificar' ){
+                $this->db->consultas('
+                   UPDATE usuario SET                     
+                        nombre     = "'. $this->datos['nombre'] .'",
+                        contraseña  = "'. $this->datos['contraseña'] .'",
+                        correo   = "'. $this->datos['correo'] .'",
+                    WHERE idUsuario = "'. $this->datos['idUsuario'] .'"
+                ');
+                $this->respuesta['msg'] = 'Registro actualizado correctamente';
+            }
+        }
+    }
+    public function buscarUsuario($valor=''){
+        $this->db->consultas('
+                       
+           select*from sugerencias 
+        ');
+        return $this->respuesta = $this->db->obtener_datos();
+    }
+    public function eliminarUsuario($idUsuario=''){
+        $this->db->consultas('
+            delete usuario
+            from usuario
+            where usuario.idUsuario = "'.$idUsuario.'"
+        ');
+        $this->respuesta['msg'] = 'Registro eliminado correctamente';
+    }
+}
+?>
