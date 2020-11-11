@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>Formulario</title>
+    <link rel="stylesheet" href="estilop.css">
+    <style>
+        body{font-family: Arial; background-color: #62b3a0; box-sizing: border-box;}
+        form{
+            background-color: #7a7878;
+            font-size: 25px;
+            padding: 10px;
+            border-radius: 5px;
+            color: black;
+            margin: 0 auto;
+            width: 300px;
+
+        }
+        .input, textarea {
+        border: 0;
+        outline:hover;
+        width: 280px;
+        }
+        .field{
+            padding: 10px;
+            width: 280px;
+
+
+        
+        .center-content{
+            text-align: center;
+
+        }
+    </style>
+
+</head>
+<body>
+
+    <form action="./private/envio/correo.php" method="POST">
+        <p>Pedido</p>
+        <input type="text"name="nombre" placeholder="ingresa tu numero de pedido" class="field" required>
+        <p>Direccion</p>
+        <input type="text"name="direccion" placeholder="ingresa tu dirección" class="field" required>
+        <p>Tipo de Pago</p>
+        <input type="text"name="pago" placeholder="Efectivo o Tarjeta" class="field"required>
+        <p>Refencia sobre tu direccion</p>
+        <textarea name="mensaje" placeholder="Una cuadra despues de la alcaldía por ejem." class="field" required></textarea>
+        
+        <input type="submit" value="Enviar" id="boton"  class="btn btn-green">
+        
+    </form>
+</body>
+</html>

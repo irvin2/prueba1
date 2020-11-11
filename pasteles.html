@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Domicilio</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdn.jsdelivr.net/sweetalert2/3.0.3/sweetalert2.min.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <link rel="stylesheet" href="assets/css/estilomenus.css">
+   
+
+</head>
+
+    <body style="background-color:white">
+        <!----Navegacion-->
+        <div class="navbar navbar-expand-lg fixed-top navbar-light">
+            <div class="container"> <alt=""><h2 style="float: left;color:#afcfee">Domicilios</h2><a class="navbar-brand"href="#"></a>
+               <div class="logo">
+
+                 
+               </div>
+               <div class="toggle">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+               </div>
+               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <br>
+             
+               <div class="links">
+                  <ul  >
+                    <li class="nav-item"> 
+                        <a href="index.html">Inicio<i class="fa fa-home fa-2x" aria-hidden="true"></i></a>
+                     </li>
+                     <ul>
+									
+											<li><a class="#" href="sandwiches.html"><span>SANDWICHES</span></a></li>
+											<li><a class="#" href="ensalada.html"><span>ENSALADAS</span></a></li>
+                      <li><a class="#" href="pizzas.html"><span>PIZZAS</span></a></li>
+                      <li><a class="#" href="combos.html"><span>COMBOS</span></a></li>
+											
+											
+											
+										</ul>
+                     </li>
+
+                    
+
+                     
+                  </ul>
+               </div>
+               <div class="clearfix"></div>
+            </div>
+         </div>
+      <div style="background-color: #042f5a;">
+        <br>
+       <br>
+       <br>
+        <br>
+       
+     </div>
+
+
+     
+     <div class="containerpasteles">
+   <div class="grids">
+           
+        
+         <div class="containerhover">
+        <div class="box" onmouseover="hover('hover')" onmouseout="hoverHide('hover')" onclick="pedidos()" >
+          
+          <img src="images/pasteldecumpleaños.jpeg" >
+          <div class="hover" id="hover"> 
+            <h1>pastel de cumpleaños $12</h1>
+            
+          </div>
+        </div>
+
+        
+        <div class="box" onmouseover="hover('hover1')" onmouseout="hoverHide('hover1')" onclick="pedidos()">
+          
+          <img src="images/pasteldefresas.jpg">
+          <div class="hover" id="hover1"> 
+            <h1>pastel  fresas $10</h1>
+            
+          </div>
+        </div>
+
+        <div class="box" onmouseover="hover('hover2')" onmouseout="hoverHide('hover2')" onclick="pedidos()">
+          
+          <img src="images/pastelchocolate.jpg" >
+        
+          <div class="hover" id="hover2"> 
+            <h1>pastel de chocolate $15</h1>
+            
+          </div>
+        </div>
+
+       
+       </div>
+    
+ 
+
+</div></div>
+  </div> 
+
+
+  <script type="text/javascript">
+ const hover = (id) => {
+   const hover = document.getElementById(id)
+   hover.className = "show"
+
+ }
+ const hoverHide = (id) => {
+   const hover = document.getElementById(id)
+   hover.className = "hover"
+ }
+</script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    function pedidos(){
+      if(sessionStorage.getItem('logueado')){ 
+       window.location.href='./realizarpedido.html'
+
+      }
+    }
+  </script>
+
+<script> const redirect =() => {
+  window.location.href="realizarpedido.html"
+  
+  
+}
+</script>
+   
+    </body>
+   
+</html>

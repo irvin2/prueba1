@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"/>
+    <link rel="stylesheet" href="assets/css/ESTILOREGISTRO.CSS">
+    <link rel="stylesheet" href="">
+    <title>Domicilio</title>
+   
+</head>
+<body class="bg-secondary">
+    <div class="container" id="container">
+      
+        <div class="form-container sign-up-container">
+            <form action="#"id="Registrate">
+                <div class="topcorner">
+                    <button  onclick="location.href='index.html'"type="button" id="btn-close-comenzar" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <h1>Crear Cuenta</h1>
+                <span>Ingresa tus datos</span><br><br>
+                <input id="nombre" required="required" type="text" placeholder="Nombre" /><br>
+                <input id="correo" required="required" type="email" placeholder="Correo" /><br>
+                <input id="pass" required="required" type="password" placeholder="Contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra  mayúscula, y al menos 8 o más caracteres"/><br><br>
+                <button  onclick="enviodedatos()">Registrate</button>
+               
+                
+                <div class="overlay-panel overlay-right">
+                    <p>¿Ya posees una cuenta?</p>
+                    <p>Inicia sección</p>
+                    <button class="ghost" id="signUp" onclick="location.href='inicio_seccion.html'">INICIO</button>
+                </div>
+            </form>
+            <script>
+              
+               function enviodedatos(){ 
+               const nombre=document.getElementById("nombre").value
+               const correo=document.getElementById("correo").value
+               const password=document.getElementById("pass").value
+                   const data={
+                       nombre:nombre,
+                       correo:correo,
+                       password:password,
+                       accion:"nuevo"
+                   }
+                   fetch (`./private/modulos/usuario/procesos.php?proceso=recibirDatos&usuario=${JSON.stringify(data)}`).then(respuesta => respuesta.json()).then(respuesta => {
+                       console.log(respuesta)
+                   })
+
+                }
+
+            </script>
+        </div>
+    
+   
+    <script src="../adomicilio/assets/js/main.js"></script>
+    <script src="../adomicilio/private/modulos/usuario/procesos.php"></script>
+</body>
+</html>
