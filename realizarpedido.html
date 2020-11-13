@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-   
+  
     <title>Formulario</title>
     <link rel="stylesheet" href="estilop.css">
     <style>
@@ -47,8 +47,15 @@
         <p>Refencia sobre tu direccion</p>
         <textarea name="mensaje" placeholder="Una cuadra despues de la alcaldía por ejem." class="field" required></textarea>
         
-        <input type="submit" value="Enviar" id="boton"  class="btn btn-green">
+        <input type="submit" value="Enviar" id="boton" onclick="alerta()" class="btn btn-green">
         
     </form>
+
+        <script>
+            function alerta(){
+                alert("TIEMPO ESTIMADO PARA SU ENTREGA: 30MIN.");
+            }
+        </script>
+  	 
 </body>
 </html>
