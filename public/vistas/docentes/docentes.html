@@ -1,0 +1,72 @@
+<form method="post" id="frm-docentes" v-on:submit.prevent="guardarDocentes" v-on:reset.prevent="limpiarDocentes">
+    <div class="card text-white bg-dark mb-3" style="max-width: 36rem;">
+        <div class="card-header">
+            MANTENIMIENTO DE PRODUCTO
+
+            <button type="button" id="btn-close-docentes" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="row row-cols-1 p-2">
+                <div class="row-col">
+                    <div class="col">
+                        NOMBRE DE PRODUCTO:
+                    </div>
+                    <div class="col">
+                        <input type="text" required v-model="docente.nombre" placeholder="AAA AAAA" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 p-2">
+                <div class="row-col">
+                    <div class="col">
+                        PRECIO:
+                    </div>
+                    <div class="col">
+                        <input type="text" required v-model="docente.direccion" placeholder="0000" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 p-2">
+                <div class="row-col">
+                    <div class="col">
+                        DESCRIPCION:
+                    </div>
+                    <div class="col">
+                        <input type="text" required v-model="docente.nit" placeholder="AAA AAAA" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 p-2">
+                <div class="row-col">
+                    <div class="col">
+                        Subir imagen del producto 
+                    </div>
+                    <div class="col">
+                        <input required type="file" name="foto" id="foto">
+                    </div>
+                </div>
+            </div>
+        
+          
+          
+            
+            <div class="row row-cols-1 p-2">
+                <div class="row-col text-center">
+                    <div class="col">
+                        <input id="btnGuardarDocentes" type="submit" class="btn btn-outline-primary text-white" value="Guardar">
+                        <input type="reset" class="btn btn-outline-warning text-white" value="Limpiar">
+                        <input type="button" class="btn btn-outline-success mostrar-buscar-docentes text-white" data-modulo="docentes" data-form="buscar-docentes" value="Buscar" >
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 p-2">
+                <div class="row-col text-center">
+                    <div class="col">{{ docente.msg }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="public/vistas/docentes/docentes.js"></script>

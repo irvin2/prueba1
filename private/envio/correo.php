@@ -35,7 +35,7 @@ $body = " <p> nombre:" . $nombre . " </p> <p> \ndireccion:" . $direccion . "</p>
     $mail->Port       = 587; 
     $mail->setFrom('doliciliosshulton@gmail.com', 'Domicilios');
     $mail->addAddress('digieduardo2@gmail.com'); 
-    $mail->addAddress('geo99garcia@gmail.com'); 
+    
     
 
   
