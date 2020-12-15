@@ -67,7 +67,9 @@ class docente{
     
     public function buscarDocente(){
 
-        $this->db->consultas('SELECT*FROM producto');
+        
+
+        $this->db->consultas('SELECT nombre, precio, descripcion FROM producto WHERE producto.idDocente="'.$idDocente.'"');
         return$this->respuesta = $this->db->obtener_datos();
 
     }

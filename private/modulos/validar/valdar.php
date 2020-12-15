@@ -1,5 +1,5 @@
 <?php 
-include('../../config/config.php');
+include('../../config/config.php');   //conexion con la DB
 $usuario = new usuario($conexion);
 
 $proceso = '';
@@ -16,11 +16,15 @@ class usuario{
     public function __construct($db){
         $this->db=$db;
     }
+
+    //obtenemos los datos
     public function recibirDatos($correo,$password){
         $this->correo=$correo;
         $this->password=$password;
         $this->validar_datos();
     }
+
+    //funcion que nos permite la validacion de los datos que enviamos a la DB
     private function validar_datos(){
         
         if( empty($this->password) ){
@@ -31,37 +35,18 @@ class usuario{
         }
         $this->login1();
     }
+    //funcion del login
     private function login1(){
        
         if( $this->respuesta['msg']==='correcto' ){
-           /* if( $this->datos['accion']==='nuevo' ){
-                $this->db->consultas('
-                    INSERT INTO  usuarior (nombre,contraseña,correo) VALUES(
-                     
-                        "'. $this->datos['nombre'] .'",
-                        "'. $this->datos['password'] .'",
-                        "'. $this->datos['correo'] .'"
-                    )
-                    
-                ');
-                $this->respuesta['msg'] = 'Registro insertado correctamente';
-            } else if( $this->datos['accion']==='modificar' ){
-                $this->db->consultas('
-                   UPDATE usuario SET                     
-                        nombre     = "'. $this->datos['nombre'] .'",
-                        contraseña  = "'. $this->datos['contraseña'] .'",
-                        correo   = "'. $this->datos['correo'] .'",
-                    WHERE idUsuario = "'. $this->datos['idUsuario'] .'"
-                ');
-                $this->respuesta['msg'] = 'Registro actualizado correctamente';
-            }*/
 
+            //consulta sql
             $this->db->consultas('
             SELECT*FROM usuarior WHERE                     
                  contraseña  = "'. $this->password .'" and
                  correo   = "'. $this->correo .'"
          ');
-         $consulta=$this->db->obtener_datos();
+         $consulta=$this->db->obtener_datos();   //funcion para obtener datos desde la DB
          if(count($consulta)>=1){
             $this->respuesta['msg'] = true;
          }else{

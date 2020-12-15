@@ -1,5 +1,5 @@
 <?php 
-include('../../config/config.php');
+include('../../config/config.php');    //conexion con la DB
 $usuario = new usuario($conexion);
 
 $proceso = '';
@@ -13,13 +13,19 @@ class usuario{
     private $datos = array(), $db;
     public $respuesta = ['msg'=>'correcto'];
     
+    //constructor
     public function __construct($db){
         $this->db=$db;
     }
+
+    //funcion para obtener datos 
     public function recibirDatos($usuario){
+        
         $this->datos = json_decode($usuario, true);
         $this->validar_datos();
     }
+    
+        //funcion que nos permite la validacion de los datos que se envian a la DB
     private function validar_datos(){
         if( empty($this->datos['nombre']) ){
             $this->respuesta['msg'] = 'por favor ingrese el nombre del Usuario';
@@ -35,6 +41,7 @@ class usuario{
     private function almacenar_usuario(){
         if( $this->respuesta['msg']==='correcto' ){
             if( $this->datos['accion']==='nuevo' ){
+                //consulta sql para enviar datos de registro
                 $this->db->consultas('
                     INSERT INTO  usuarior (nombre,contraseña,correo) VALUES(
                      
@@ -46,7 +53,9 @@ class usuario{
                 ');
                 $this->respuesta['msg'] = 'Registro insertado correctamente';
             } else if( $this->datos['accion']==='modificar' ){
+                //consulta sql para actualizar datos en la tabla de usuarior
                 $this->db->consultas('
+                
                    UPDATE usuario SET                     
                         nombre     = "'. $this->datos['nombre'] .'",
                         contraseña  = "'. $this->datos['contraseña'] .'",

@@ -6,11 +6,11 @@ var appbuscar_docentes = new Vue({
     },
     methods:{
         buscarDocentes(){
-            fetch(`private/Modulos/docentes/procesos.php?proceso=buscarDocente&docente=${this.valor}`).then( resp=>resp.json() ).then(resp=>{ 
+            fetch(`private/Modulos/docentes/procesos.php?proceso=buscarDocentes&docente=${this.valor}`).then( resp=>resp.json() ).then(resp=>{ 
                 this.mis_docentes = resp;
             });
         },
-        modificarDocente(docente){
+        modificarDocentes(docente){
             appdocentes.docente = docente;
             appdocentes.docente.accion = 'modificar';
         },
