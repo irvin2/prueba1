@@ -23,4 +23,4 @@ var appbuscar_docentes = new Vue({
     created(){
         this.buscarDocentes();
     }
-});
+}); 

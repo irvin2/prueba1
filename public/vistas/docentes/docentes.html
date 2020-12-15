@@ -14,7 +14,7 @@
                         NOMBRE DE PRODUCTO:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="docente.nombre" placeholder="AAA AAAA" class="form-control">
+                        <input name="nombre" type="text" required v-model="docente.nombre" placeholder="AAA AAAA" class="form-control">
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                         PRECIO:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="docente.direccion" placeholder="0000" class="form-control">
+                        <input name="precio" type="text" required v-model="docente.precio" placeholder="0000" class="form-control">
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         DESCRIPCION:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="docente.nit" placeholder="AAA AAAA" class="form-control">
+                        <input name="descripcion" type="text" required v-model="docente.descripcion" placeholder="AAA AAAA" class="form-control">
                     </div>
                 </div>
             </div>
@@ -44,13 +44,10 @@
                         Subir imagen del producto 
                     </div>
                     <div class="col">
-                        <input  type="file" name="foto" id="foto">
+                        <input name="imagen" v-on:change="obtenerImagen" type="file" name="foto" id="foto">
                     </div>
                 </div>
             </div>
-        
-          
-          
             
             <div class="row row-cols-1 p-2">
                 <div class="row-col text-center">
@@ -69,4 +66,6 @@
         </div>
     </div>
 </form>
+ 
+
 <script src="public/vistas/docentes/docentes.js"></script>
