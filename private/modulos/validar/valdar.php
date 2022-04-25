@@ -6,7 +6,7 @@ $proceso = '';
 if( isset($_GET['proceso']) && strlen($_GET['proceso'])>0 ){
 	$proceso = $_GET['proceso'];
 }
-$usuario->$proceso( $_GET['correo'],$_GET['password'] );
+$usuario->$proceso( $_GET['correo'],$_GET['correo'] );
 print_r(json_encode($usuario->respuesta));
 
 class usuario{

@@ -285,7 +285,7 @@ color: white;
 }
 
 .card__side--front {
-  background-color: #032a4b;
+  background-color: #000000;
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
@@ -556,7 +556,7 @@ a {
 /* End Reset Some Elements */
 
 .navbar {
-   background-color: #eaeaea;
+   background-color: #696767;
    
 }
 
@@ -580,7 +580,7 @@ a {
 .toggle span {
    width: 100%;
    height: 4px;
-   background-color: #fff;
+   background-color: rgb(255, 255, 255);
    display: block;
    margin-bottom: 3px;
 }
@@ -588,7 +588,7 @@ a {
 /* Start Logo */
 
 .logo{
-  color: #0a1b2c;
+  color: #f3f3f3;
 }
 
 
@@ -610,7 +610,7 @@ a {
 }
 
 .navbar .container .links ul li a {
-   color:  #30475e;
+   color:  #ffffff;
    font-size: 18px;
    font-family: cursive;
 }
@@ -619,7 +619,7 @@ a {
 .intro {
   text-align:center;
   padding:50px 0;
-  color:#0c2135;
+  color:#ffffff;
   font-family:cursive;
 }
 /* End Intro */
